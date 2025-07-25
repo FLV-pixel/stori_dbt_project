@@ -1,15 +1,10 @@
-
-target/
-dbt_packages/
-logs/
-dbt_internal_packages/
-
 # Ignora claves y archivos sensibles
 *.json
 *.key
 *.pem
 
 # Carpeta de compilación y artefactos de dbt
+dbt_internal_packages/
 dbt_packages/
 target/
 logs/

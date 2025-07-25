@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key=['customer_id', 'txn_type', 'month']
+    unique_key=['customer_id', 'txn_type', 'month'],
+    incremental_strategy='merge',
 ) }}
 
 with base as (
@@ -16,9 +17,6 @@ with base as (
     join {{ source('stori_test', 'customers') }} c
         on cp.customer_id = c.customer_id
 
-    {% if is_incremental() %}
-        where t.txn_date > (select max(month) from {{ this }})
-    {% endif %}
 
     group by c.customer_id, t.txn_type, date_trunc(t.txn_date, month)
 
