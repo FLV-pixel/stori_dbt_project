@@ -1,0 +1,24 @@
+
+target/
+dbt_packages/
+logs/
+dbt_internal_packages/
+
+# Ignora claves y archivos sensibles
+*.json
+*.key
+*.pem
+
+# Carpeta de compilación y artefactos de dbt
+dbt_packages/
+target/
+logs/
+manifest.json
+run_results.json
+profiles.yml
+
+# Archivos temporales
+.DS_Store
+.env
+*.pyc
+__pycache__/
