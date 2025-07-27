@@ -1,60 +1,35 @@
 version: 2
 
-sources:
-  - name: stori_test
-    database: stori-test-466820     # ID exacto del proyecto
-    schema: Stori_Test              # Nombre exacto del dataset
-    tables:
-      - name: customers
-      - name: customer_products
-      - name: credit_card_transactions
+# Part 1
 
 models:
-  - name: customer_transaction_summary
-    description: "Resumen de transacciones por cliente y tipo de transacción"
+  - name: transactions_summary_by_customer
     columns:
       - name: customer_id
-        description: "Identificador del cliente"
-        tests:
-          - not_null
       - name: full_name
-        description: "Nombre completo del cliente"
       - name: txn_type
-        description: "Tipo de transacción: 'purchase' o 'payment'"
       - name: total_amount
-        description: "Monto total por tipo de transacción y cliente"
+        tests:
+          - not_null
 
-# Parte 2
+# Part 2
 
-  - name: monthly_transaction_customers
-    description: "Conteo mensual y acumulado de transacciones por cliente"
+  - name: transactions_per_customer_per_month
     columns:
       - name: customer_id
-        description: "ID del cliente"
-        tests:
-          - not_null
+      - name: full_name
       - name: txn_month
-        description: "Mes de la transacción (inicio del mes)"
+      - name: running_transactions_count
         tests:
           - not_null
-      - name: monthly_txn_count
-        description: "Número de transacciones en ese mes"
-      - name: running_txn_total
-        description: "Total acumulado de transacciones por cliente"
 
-
-# Parte 3
+# Part 3
 
   - name: incremental_summary
-    description: "Resumen mensual incremental del monto de transacciones por cliente y tipo"
     columns:
       - name: customer_id
-        description: "ID del cliente"
+      - name: txn_type
+      - name: month
+      - name: monthly_amount
         tests:
           - not_null
-      - name: txn_type
-        description: "Tipo de transacción"
-      - name: month
-        description: "Mes de la transacción"
-      - name: monthly_amount
-        description: "Monto total mensual por tipo y cliente"

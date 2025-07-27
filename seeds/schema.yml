@@ -1,0 +1,31 @@
+version: 2
+
+seeds:
+  - name: customers
+    config:
+      column_types:
+        customer_id: INTEGER
+        full_name: STRING
+        email: STRING
+        signup_date: DATE
+        status: STRING
+
+  - name: customer_products
+    config:
+      column_types:
+        customer_product_id: INTEGER
+        customer_id: INTEGER
+        product_id: INTEGER
+        opened_date: DATE
+        status: STRING
+
+  - name: credit_card_transactions
+    config:
+      column_types:
+        txn_id: INTEGER
+        customer_product_id: INTEGER
+        txn_date: DATE
+        amount: FLOAT64
+        txn_type: STRING
+
+

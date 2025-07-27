@@ -1,0 +1,9 @@
+﻿txn_id,customer_product_id,txn_date,amount,txn_type
+1001,1,2023-07-10,200,purchase
+1002,1,2023-07-15,100,payment
+1003,2,2023-07-12,5000,payment
+1004,3,2023-07-18,1200,purchase
+1005,4,2023-07-20,800,payment
+1006,5,2023-06-20,300,purchase
+1007,6,2023-08-01,700,purchase
+1008,1,2023-08-02,250,purchase

@@ -1,0 +1,8 @@
+﻿customer_product_id,customer_id,product_id,opened_date,status
+1,1,101,2023-01-01,active
+2,1,201,2023-02-01,active
+3,2,102,2022-11-10,active
+4,2,202,2023-01-15,active
+5,3,103,2021-08-01,closed
+6,4,104,2023-04-01,active
+7,6,101,2023-07-01,active
