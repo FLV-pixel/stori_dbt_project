@@ -100,12 +100,12 @@ To do this, we need to calculate the `total amount`, which can be done through a
 
 ## `models\transactions_summary_by_customer.sql`
 ```sql
-with dbt_Part1 as (   -- We define our CTE in this case from the first task of part 1.
+with dbt_Part1 as (   
     select 
         c.customer_id,
-        MIN(c.full_name) AS full_name, -- We use MIN to avoid adding the full_name column inside the group by. 
+        MIN(c.full_name) AS full_name, -- I use MIN to avoid adding the full_name column inside the group by. 
         cct.txn_type,
-        sum(cct.amount) as total_amount  -- In this section, we define that we want to sum the amounts of the transactions made.
+        sum(cct.amount) as total_amount  -- In this section, I want to sum the amounts of the transactions made.
     from {{ ref('customers') }} c
     join {{ref('customer_products')}} cp 
     on c.customer_id = cp.customer_id 
@@ -134,7 +134,7 @@ models:
       - name: txn_type
       - name: total_amount
         tests:
-          - not_null    -- We apply a not\_null test to avoid empty amounts.
+          - not_null    -- I apply a not_null test to avoid empty amounts.
 ```
 ---
 
@@ -153,7 +153,7 @@ Additionally, we are asked to use a window function `OVER` to calculate the numb
 ## `models\transactions_per_customer_per_month.sql`
 ```sql
 
-with dbt_Part2 as (        -- The first part calculates the number of transactions per month for each customer
+with dbt_Part2 as (        -- The first part, I calculate the number of transactions per month for each customer
 
     select 
         c.customer_id,
@@ -176,7 +176,7 @@ select        -- The second part calculates a cumulative count of transactions p
     full_name,
     txn_month,
     monthly_transaction_count,
-    sum(monthly_transaction_count) over (partition by customer_id order by txn_month) as running_transaction_count        --`OVER` indicates that a window function is being used.
+    sum(monthly_transaction_count) over (partition by customer_id order by txn_month) as running_transaction_count        --OVER is my window function.
 from dbt_Part2
 order by 
     customer_id,
@@ -229,7 +229,7 @@ models:
   Stori_Test:
       +materialized: table
       incremental_summary:
-        +materialized: incremental  -- The models in that subfolder will be incremental, meaning they are not recreated each time.
+        +materialized: incremental  -- I define that my model incremental_summary will be incremental.
 
 # Seed configurations
 seeds:
