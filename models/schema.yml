@@ -19,6 +19,8 @@ models:
       - name: customer_id
       - name: full_name
       - name: txn_month
+        tests:
+          - not_null      
       - name: running_transactions_count
         tests:
           - not_null

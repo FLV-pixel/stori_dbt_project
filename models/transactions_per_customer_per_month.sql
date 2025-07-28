@@ -2,7 +2,7 @@ with dbt_Part2 as (
 
     select 
         c.customer_id,
-        c.full_name,
+        min(c.full_name) as full_name,
         DATE_TRUNC(cct.txn_date, MONTH) as txn_month,
         count (txn_id) as monthly_transaction_count
     from {{ref ('customers')}} c
@@ -10,7 +10,6 @@ with dbt_Part2 as (
     join {{ref ('credit_card_transactions')}} cct on cp.customer_product_id = cct.customer_product_id
     group by 
         c.customer_id,
-        c.full_name,
         DATE_TRUNC(cct.txn_date, MONTH)
     order by 
         c.customer_id,

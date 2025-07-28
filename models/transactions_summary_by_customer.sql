@@ -1,7 +1,7 @@
 with dbt_Part1 as (
     select 
         c.customer_id,
-        c.full_name,
+        MIN(c.full_name) AS full_name,
         cct.txn_type,
         sum(cct.amount) as total_amount
     from {{ ref('customers') }} c
@@ -12,12 +12,8 @@ with dbt_Part1 as (
 
     group by 
         c.customer_id, 
-        c.full_name, 
         cct.txn_type
 
 )
 
 select * from dbt_Part1
-
-
-
